@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#13264d">
+  <meta name="description" content="Videojuego educativo para aprender honestidad y rechazar la corrupción.">
+  <title>Avanza sin Tranza · Kids Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pro.css">
+  <script src="js/questions.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body data-screen="welcome" data-scene="inicio">
+  <div class="ambient-layer" aria-hidden="true">
+    <span class="ambient-orb ambient-orb-a"></span>
+    <span class="ambient-orb ambient-orb-b"></span>
+    <span class="ambient-orb ambient-orb-c"></span>
+    <span class="ambient-grid"></span>
+  </div>
+  <a class="skip-link" href="#main">Saltar al juego</a>
+
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="explorer" viewBox="0 0 160 200">
+        <ellipse cx="80" cy="188" rx="46" ry="9" fill="#123d35" opacity=".15"/>
+        <path d="M46 91 21 154 65 143 100 152 128 146 112 91Z" fill="#ff705b" stroke="#123d35" stroke-width="5" stroke-linejoin="round"/>
+        <path d="m62 137-7 39m43-39 7 39" stroke="#123d35" stroke-width="19" stroke-linecap="round"/>
+        <path d="M39 180h22m37 0h23" stroke="#fff4c9" stroke-width="15" stroke-linecap="round"/>
+        <path d="m49 102-16 30m77-30 17 23" stroke="#bf7b50" stroke-width="15" stroke-linecap="round"/>
+        <path d="M49 95Q80 79 111 95L107 140Q80 150 53 140Z" fill="#30c4ba" stroke="#123d35" stroke-width="5"/>
+        <path d="m80 105 5 9 10 2-7 8 1 10-9-5-9 5 1-10-7-8 10-2Z" fill="#ffda57"/>
+        <circle cx="80" cy="58" r="37" fill="#bf7b50" stroke="#123d35" stroke-width="5"/>
+        <path d="M44 50Q35 14 74 14q48-6 45 40L102 38Q83 56 44 50" fill="#123d35"/>
+        <path d="M40 32Q52-2 94 12l21 20Z" fill="#ffda57" stroke="#123d35" stroke-width="5"/>
+        <path d="M34 34h92" stroke="#123d35" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="66" cy="61" r="3.5" fill="#123d35"/><circle cx="94" cy="61" r="3.5" fill="#123d35"/>
+        <path d="M68 75q12 11 24 0" fill="none" stroke="#123d35" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="55" cy="72" r="6" fill="#ec9979"/><circle cx="105" cy="72" r="6" fill="#ec9979"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"><img src="img/icon-dog-kids.png" alt="" style="width:100%;height:100%;object-fit:contain;"></span>
+      <span class="brand-copy"><strong>AVANZA</strong><span class="brand-small">SIN TRANZA</span></span>
+      <span class="brand-edition">KIDS</span>
+    </div>
+    <nav class="top-actions" aria-label="Opciones del juego">
+      <span class="record"><span class="record-dot" aria-hidden="true"></span><span>Récord</span><strong id="record">0</strong></span>
+      <button id="sound-button" class="button button-small button-quiet" type="button" aria-pressed="false">🔇 Sonido</button>
+      <button id="help-button" class="button button-small button-quiet" type="button" aria-label="Cómo jugar">? <span class="help-label">Cómo jugar</span></button>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="welcome" class="welcome welcome-auth" aria-labelledby="welcome-title">
+      <div class="auth-browser">
+        <div class="browser-shell">
+          <div class="browser-bar">
+            <span class="browser-dots"><i></i><i></i><i></i></span>
+            <span class="browser-url">avanzasintranza.mx</span>
+          </div>
+          <div class="auth-stage">
+            <div class="auth-corner auth-corner-left">
+              <div class="welcome-logo-badge"><img src="img/icon-kids.png" alt="Oficial Fiel" style="width:180px;height:160px;object-fit:contain;border-radius:20px;"><strong>Oficial</strong></div> 
+            </div>
+            <div class="auth-card">
+              <div class="auth-badge"><span class="auth-badge-icon">🚀</span><span>Ruta sin tranza</span></div>
+              <h1 id="welcome-title">¡Bienvenido de vuelta!</h1>
+              <p class="auth-subtitle">Inicia y sigue tu racha con una interfaz más colorida y divertida.</p>
+              <form id="start-form" class="start-form auth-form">
+                <label for="player-name">Nombre del jugador</label>
+                <div class="input-shell"><span aria-hidden="true">👤</span><input id="player-name" name="nombre" type="text" maxlength="24" placeholder="Tu nombre o apodo" autocomplete="nickname" aria-describedby="name-hint"></div>
+                <small id="name-hint">Puedes usar un apodo o dejarlo vacío.</small>
+                <div class="auth-actions">
+                  <button class="button button-primary start-button" type="submit">¡VAMOS A AVANZAR! 🚀</button>
+                  <button id="continue-button" class="button button-secondary" type="button" hidden>CONTINUAR PARTIDA</button>
+                </div>
+                <p id="session-summary" class="session-summary" hidden></p>
+              </form>
+            </div>
+            <div class="auth-corner auth-corner-right">
+            <div class="welcome-mascot-badge"><img src="img/icon-dog.png" alt="Oficial Fiel" style="width:150px;height:150px;object-fit:contain;border-radius:20px;"><strong>Oficial Fiel</strong></div> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="saved-summary" class="saved-summary" hidden></p>
+    </section>
+
+    <section id="game" class="game" hidden aria-labelledby="game-title">
+      <div class="app-browser">
+        <div class="browser-bar">
+          <span class="browser-dots"><i></i><i></i><i></i></span>
+          <span class="browser-url">avanzasintranza.mx</span>
+        </div>
+        <div class="app-shell">
+          <aside class="app-sidebar" aria-label="Menú principal">
+            <div class="sidebar-brand">
+<div class="sidebar-brand-mark"><img src="img/icon-dog-kids.png" alt="" style="width:100%;height:100%;object-fit:contain;"></div>              <div><strong>AVANZA</strong><span>SIN TRANZA</span></div>
+            </div>
+            <nav class="sidebar-nav">
+              <button class="nav-item active" type="button" data-view="home"><span class="nav-icon">🏠</span><span>INICIO</span></button>
+              <button class="nav-item" type="button" data-view="retos"><span class="nav-icon">🎯</span><span>RETOS</span></button>
+              <button class="nav-item" type="button" data-view="ranking"><span class="nav-icon">🏆</span><span>CAMPEONES</span></button>
+              <button class="nav-item" type="button" data-view="profile"><span class="nav-icon">🧑</span><span>PERFIL</span></button>
+              <button class="nav-item" type="button" data-view="rewards"><span class="nav-icon">🎁</span><span>PREMIOS</span></button>
+            </nav>
+             <div class="nav-bottom-group"> <button id="restart-button" class="nav-logout" type="button">🔄 Reiniciar partida</button> 
+             <button id="exit-button" class="nav-logout" type="button">🚪 Salir</button> </div>
+          </aside>
+
+          <div class="app-main">
+            <header class="app-header">
+              <div>
+                <h1 id="game-title" tabindex="-1">¡Hola, <span id="greeting-name"></span>! 👋</h1>
+                <p id="view-subtitle" class="view-subtitle">Aquí va tu progreso del día.</p>
+              </div>
+              <div class="game-heading-actions">
+                <div class="player-chip"><span id="player-initial">E</span><div><small>JUGADOR</small><strong id="player-chip-name">Explorador</strong></div></div>
+              </div>
+            </header>
+
+            <div class="app-view is-active" id="view-home" data-view-panel="home">
+              <div class="home-stats-grid">
+                <div class="home-stat home-stat-points"><span>⭐</span><div><strong id="home-score">0</strong><small>PUNTOS</small></div></div>
+                <div class="home-stat"><span>🔥</span><div><strong id="home-streak">0</strong><small>DÍAS RACHA</small></div></div>
+                <div class="home-stat"><span>📊</span><div><strong id="home-ranking">#14</strong><small>LUGAR</small></div></div>
+                <div class="home-stat"><span>🛡️</span><div><strong id="home-level">NIVEL 1</strong><small>INTEGRIDAD</small></div></div>
+              </div>
+              <div class="home-grid">
+                <section class="home-card path-card">
+                  <div class="section-line"><h2>🗺️ Tu camino de hoy</h2><button class="link-chip" type="button" data-view-jump="retos">Ir al mapa</button></div>
+                  <div id="route-summary-list" class="route-summary-list"></div>
+                  <div class="mentor-note mentor-home"><span>🧑‍✈️</span><div><strong>Consejo del Oficial Fiel</strong><p id="mentor-home">Cada buena decisión te acerca a la meta. ¡Vamos por el siguiente reto!</p></div></div>
+                </section>
+                <section class="home-card week-card">
+                  <div class="section-line"><h2>🏅 Tu semana</h2><span class="chip-soft">Resumen</span></div>
+                  <div id="weekly-summary-list" class="weekly-summary-list"></div>
+                </section>
+              </div>
+            </div>
+
+            <div class="app-view" id="view-retos" data-view-panel="retos">
+              <div class="stats" aria-label="Estadísticas de la partida">
+                <div class="stat stat-points"><span aria-hidden="true">✦</span><div><small>PUNTOS</small><strong id="score">0</strong></div></div>
+                <div class="stat"><span aria-hidden="true">⚑</span><div><small>NIVEL</small><strong id="level">1 / 15</strong></div></div>
+                <div class="stat"><span class="good-text" aria-hidden="true">✓</span><div><small>CORRECTAS</small><strong id="correct-count">0</strong></div></div>
+                <div class="stat"><span class="bad-text" aria-hidden="true">↺</span><div><small>INCORRECTAS</small><strong id="wrong-count">0</strong></div></div>
+                <div class="stat stat-streak"><span aria-hidden="true">🔥</span><div><small>RACHA</small><strong id="streak-count">0</strong></div></div>
+              </div>
+
+              <div class="game-layout">
+                <section class="board-panel" aria-labelledby="board-title">
+                  <div class="panel-heading">
+                    <div><span class="eyebrow">TU AVENTURA </span><h2 id="board-title">Tu ciudad, tus decisiones.</h2></div>
+                    <div class="panel-meta"><span id="scene-name">INICIO</span><span class="map-tag">MAPA 01</span></div>
+                  </div>
+                  <div class="board" id="board">
+                    <svg id="route" class="route" aria-hidden="true"><path id="route-base"/><path id="route-progress"/></svg>
+                    <ol id="map-nodes" class="map-nodes" aria-label="Recorrido de los 15 niveles"></ol>
+                    <svg id="player-token" class="player-token" role="img" aria-label="Tu personaje en el nivel 1"><use href="#explorer"/></svg>
+                  </div>
+                  <div class="map-legend"><span><i class="legend-dot done-dot"></i>Superado</span><span><i class="legend-dot current-dot"></i>Estás aquí</span><span><i class="legend-dot locked-dot"></i>Por descubrir</span></div>
+                  <div class="progress-heading"><span>Camino a héroe honesto</span><strong id="progress-label">0 / 15</strong></div>
+                  <progress id="progress" max="15" value="0" aria-label="Niveles completados">0%</progress>
+                </section>
+
+                <aside class="side-panel" aria-label="Reto actual e insignias">
+                  <div class="mission-card">
+                    <div class="mission-top"><div><span class="eyebrow">TU SIGUIENTE RETO</span><span id="mission-status" class="mission-status"><i></i> Disponible</span></div><span id="hearts" class="hearts" role="img" aria-label="3 vidas de 3">♥ ♥ ♥</span></div>
+                    <span id="mission-icon" class="mission-icon" aria-hidden="true">🏫</span>
+                    <span id="mission-event" class="event-label" hidden></span>
+                    <h2 id="mission-title"></h2><p id="mission-preview"></p>
+                    <button id="mission-button" class="button button-primary" type="button">RESOLVER RETO <span aria-hidden="true">→</span></button>
+                    <small class="mission-reward" id="mission-reward">✦ +100 puntos por una buena decisión</small>
+                  </div>
+                  <section class="badges-card" aria-labelledby="badges-title"><div class="section-line"><h2 id="badges-title">Tus insignias</h2><span id="badge-count">0 / 4</span></div><div id="badges" class="badges"></div></section>
+                  <p class="gentle-note">💡 Equivocarse también enseña. Lee la explicación y vuelve a intentarlo.</p>
+                </aside>
+              </div>
+            </div>
+
+            <div class="app-view" id="view-ranking" data-view-panel="ranking">
+              <section class="screen-card ranking-screen">
+                <div class="section-line"><div><h2>Tabla de campeones</h2><p class="view-mini-subtitle">Tu comunidad · esta semana</p></div><span class="podium-icon">🏆</span></div>
+                <div id="leaderboard-podium" class="leaderboard-podium"></div>
+                <div id="leaderboard-list" class="leaderboard-list"></div>
+              </section>
+            </div>
+
+            <div class="app-view" id="view-profile" data-view-panel="profile">
+              <div class="profile-grid">
+                <section class="screen-card profile-card-main">
+                  <h2>Tu perfil</h2>
+                  <p class="view-mini-subtitle">Personaliza tu cuenta</p>
+                  <div class="profile-emblem-wrap">
+                    <div class="profile-emblem"><svg class="profile-explorer" role="img" aria-label="Avatar del jugador"><use href="#explorer"/></svg></div>
+                    <strong id="profile-name">Explorador</strong>
+                    <span id="profile-rank" class="profile-rank">Heroe honesto</span>
+                  </div>
+                  <div id="profile-color-swatches" class="profile-color-swatches">
+                    <button type="button" class="swatch active" data-color="gold" aria-label="Tema dorado"></button>
+                    <button type="button" class="swatch" data-color="blue" aria-label="Tema azul"></button>
+                    <button type="button" class="swatch" data-color="green" aria-label="Tema verde"></button>
+                    <button type="button" class="swatch" data-color="orange" aria-label="Tema naranja"></button>
+                    <button type="button" class="swatch" data-color="cyan" aria-label="Tema turquesa"></button>
+                  </div>
+                </section>
+                <section class="screen-card profile-card-side">
+                  <h2>🎖️ Insignias por desbloquear</h2>
+                  <div id="profile-badge-goals" class="profile-badge-goals"></div>
+                  <h3 class="week-streak-title">📅 Tu racha de la semana</h3>
+                  <div id="profile-week" class="profile-week"></div>
+                  <div class="mentor-note"><span>🧑‍✈️</span><div><strong>El Oficial Fiel dice</strong><p id="profile-tip">Vas muy bien. Completa el siguiente reto para mantener tu racha.</p></div></div>
+                </section>
+              </div>
+            </div>
+
+            <div class="app-view" id="view-rewards" data-view-panel="rewards">
+              <section class="screen-card rewards-screen">
+                <div class="section-line"><div><h2>Premios y trajes</h2><p class="view-mini-subtitle">Desbloquea con tus puntos </p></div><div class="reward-tabs"><button type="button" class="reward-tab active">Avatares</button><button type="button" class="reward-tab">Insignias</button><button type="button" class="reward-tab">Marcos</button></div></div>
+                <div id="reward-grid" class="reward-grid"></div>
+              </section>
+            </div>
+
+            <div class="app-view" id="view-sanction" data-view-panel="sanction">
+              <section class="screen-card sanction-screen">
+                <div class="sanction-logo">⚠️</div>
+                <h2 id="sanction-title">¡Ups! TE desviaste</h2>
+                <p class="sanction-copy">Elegiste varias respuestas no muy honestas seguidas. El Oficial Fiel te ayuda a volver a tu aventura.</p>
+                <div class="sanction-metrics">
+                  <div><span>Racha interrumpida</span><strong id="sanction-streak-loss">0</strong></div>
+                  <div><span>Puntos retenidos</span><strong id="sanction-points-loss">-0 pts</strong></div>
+                  <div><span>Tiempo de reflexión</span><strong id="sanction-time">1 reto</strong></div>
+                </div>
+                <button id="sanction-return" class="button button-primary" type="button">Volver a la ruta 🛣️</button>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="victory" class="victory" hidden aria-labelledby="victory-title">
+      <div class="victory-seal"><span class="victory-trophy" aria-hidden="true">🏆</span><span>AVENTURA COMPLETADA</span></div><span class="eyebrow">¡MISIÓN CUMPLIDA!</span>
+      <h1 id="victory-title" tabindex="-1">¡FELICIDADES!</h1><p><strong id="winner-name"></strong>, has completado Avanza sin Tranza.</p>
+      <span id="rank" class="rank"></span><p class="victory-message">Cada decisión honesta ayuda a construir una comunidad más justa.</p>
+      <div class="final-stats"><div><strong id="final-score"></strong><span>Puntos finales</span></div><div><strong id="final-correct"></strong><span>Correctas</span></div><div><strong id="final-wrong"></strong><span>Incorrectas</span></div><div><strong id="final-accuracy"></strong><span>Aciertos</span></div></div>
+      <p class="accuracy-note">El porcentaje incluye todos tus intentos.</p><div id="final-badges" class="final-badges" aria-label="Insignias obtenidas"></div>
+      <p id="best-results" class="best-results"></p>
+      <div class="victory-actions"><button id="play-again" class="button button-primary" type="button">JUGAR DE NUEVO ↻</button><button id="results-button" class="button button-quiet" type="button">VER RESULTADOS</button></div>
+    </section>
+  </main>
+
+  <footer>Hecho de buenas decisiones. <span aria-hidden="true">✦</span> Avanza sin Tranza</footer>
+  <p id="storage-note" class="storage-note" hidden>El navegador no permite guardar datos. Puedes jugar, pero tus récords no se conservarán al cerrar.</p>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+  <noscript><p class="noscript">Activa JavaScript en tu navegador para jugar.</p></noscript>
+
+  <dialog id="question-dialog" class="dialog question-dialog" aria-labelledby="question-title" aria-describedby="question-description">
+    <div class="dialog-top"><span id="question-step" class="eyebrow"></span><button id="close-question" class="close-button" type="button" aria-label="Volver al mapa">×</button></div>
+    <div class="question-hero-art" aria-hidden="true"><span class="question-art-icon" id="question-art-icon">🏫</span><div class="question-art-shape question-art-box"></div><div class="question-art-shape question-art-coin"></div><div class="question-art-shape question-art-star"></div></div>
+    <div class="character-line"><span id="question-character" class="character-emoji" aria-hidden="true"></span><div><span id="question-person"></span><span id="question-topic" class="topic-label"></span></div><span id="question-event" class="event-label" hidden></span></div>
+    <h2 id="question-title" tabindex="-1"></h2><p id="question-description" class="scenario"></p><div class="choice-heading"><p class="choice-prompt">¿Qué decides hacer?</p><span class="keyboard-hint">Usa A, B o C</span></div>
+    <div id="options" class="options"></div>
+    <div id="feedback" class="feedback" hidden role="status" aria-live="polite"><strong id="feedback-title"></strong><p id="feedback-text"></p><span id="feedback-points"></span></div>
+    <button id="feedback-button" class="button button-primary feedback-button" type="button" hidden></button>
+  </dialog>
+
+  <dialog id="rest-dialog" class="dialog small-dialog" aria-labelledby="rest-title"><span class="dialog-illustration" aria-hidden="true">💛</span><h2 id="rest-title">Una pausa para aprender</h2><p>Te quedaste sin corazones, pero tu aventura continúa. Recupera tus 3 vidas y prueba de nuevo: conservas tu avance y tus puntos actuales.</p><button id="retry-button" class="button button-primary" type="button">RECUPERAR VIDAS Y REINTENTAR</button><button id="rest-restart" class="button button-quiet" type="button">Reiniciar el juego</button></dialog>
+  <dialog id="restart-dialog" class="dialog small-dialog" aria-labelledby="restart-title"><span class="dialog-illustration" aria-hidden="true">↻</span><h2 id="restart-title">¿Empezar desde el principio?</h2><p>La partida volverá al nivel 1 con 0 puntos y 3 vidas. Tus récords e insignias guardadas se conservarán.</p><button id="confirm-restart" class="button button-primary" type="button">SÍ, REINICIAR</button><button class="button button-quiet" data-close="restart-dialog" type="button">Seguir jugando</button></dialog>
+  <dialog id="help-dialog" class="dialog" aria-labelledby="help-title"><div class="dialog-top"><span class="eyebrow">LAS REGLAS SON SENCILLAS</span><button class="close-button" data-close="help-dialog" aria-label="Cerrar ayuda" type="button">×</button></div><h2 id="help-title">¡La honestidad te lleva lejos!</h2><ol class="help-list"><li>Recorre 15 niveles. En cada reto, elige una decisión honesta.</li><li>Una respuesta correcta te permite avanzar y ganar 100 puntos. Algunas casillas dan un bonus de 25 o 50 puntos.</li><li>Una respuesta incorrecta resta 25 puntos y un corazón. Los puntos nunca bajan de cero.</li><li>Comienzas con 3 corazones. Si los pierdes, puedes recuperarlos y reintentar el nivel sin perder tu avance.</li><li>Consigue 4 insignias: 300 puntos, 700 puntos, 5 aciertos seguidos y completar la aventura.</li></ol><div class="learning-note"><strong>¿Qué es la corrupción?</strong><p>Es abusar de un cargo o de la confianza recibida para conseguir un beneficio indebido. Copiar o quedarse con algo ajeno son faltas de honestidad; no toda falta de honestidad es corrupción.</p><p>Si alguien te presiona o te hace sentir en peligro, aléjate si puedes y pide ayuda a una persona adulta de confianza. No necesitas enfrentarte a nadie.</p></div><p class="keyboard-note">Puedes usar Tab, Mayús + Tab y Enter. Escape cierra las ventanas y te devuelve al mapa.</p><button class="button button-primary" data-close="help-dialog" type="button">¡ENTENDIDO!</button></dialog>
+  <dialog id="results-dialog" class="dialog results-dialog" aria-labelledby="results-title"><div class="dialog-top"><span class="eyebrow">LO QUE APRENDISTE</span><button class="close-button" data-close="results-dialog" aria-label="Cerrar resultados" type="button">×</button></div><h2 id="results-title" tabindex="-1">Tus decisiones, una a una</h2><p id="results-summary"></p><div id="results-list"></div><button class="button button-primary" data-close="results-dialog" type="button">VOLVER A MI CELEBRACIÓN</button></dialog>
+  <!--SALIR-->
+  <script> document.getElementById('exit-button')?.addEventListener('click', () => { document.getElementById('game').hidden = true; document.getElementById('victory').hidden = true; document.getElementById('welcome').hidden = false; document.body.dataset.screen = 'welcome'; window.scrollTo({ top: 0, behavior: 'smooth' }); }); </script>
+
+</body>
+</html>
